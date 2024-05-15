@@ -1,0 +1,32 @@
+image:
+  repository: <your_container_registry>/opensearch
+  tag: "latest"
+  pullPolicy: IfNotPresent
+
+replicaCount: 3
+
+service:
+  type: ClusterIP
+  port: 9200
+
+resources:
+  limits:
+    cpu: 1000m
+    memory: 2Gi
+  requests:
+    cpu: 500m
+    memory: 1Gi
+
+nodeSelector: {}
+tolerations: []
+affinity: {}
+
+persistence:
+  enabled: true
+  size: 10Gi
+  storageClass: "default"
+
+env:
+  - name: discovery.type
+    value: "single-node"
+
